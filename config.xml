@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Armat_Armatimport>
+            <version>0.0.7.6</version>
+        </Armat_Armatimport>
+    </modules>
+    <global>
+        <models>
+            <armatimport>
+                <class>Armat_Armatimport_Model</class>
+            </armatimport>
+        </models>
+        <blocks>
+            <armatimport>
+                <class>Armat_Armatimport_Block</class>
+            </armatimport>
+        </blocks>
+        <helpers>
+            <armatimport>
+                <class>Armat_Armatimport_Helper</class>
+            </armatimport>
+        </helpers>
+    </global>
+
+    <frontend>
+        <routers>
+            <armatimport>
+                <use>standard</use>
+                <args>
+                    <module>Armat_Armatimport</module>
+                    <frontName>armatimport</frontName>
+                </args>
+            </armatimport>
+        </routers>
+    </frontend>
+
+    <crontab>
+        <jobs>
+			<armatimport_downloadproduct>
+                <schedule>	
+                    <cron_expr>15 22 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>armatimport/product::downloadProductFile</model>
+                </run>
+            </armatimport_downloadproduct>
+
+            <armatimport_product>
+                <schedule>
+                    <cron_expr>50 23 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>armatimport/product::newProductImport</model>
+                </run>
+            </armatimport_product>
+        </jobs>
+    </crontab>
+	
+</config>
